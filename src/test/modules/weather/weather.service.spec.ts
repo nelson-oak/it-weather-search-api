@@ -114,7 +114,7 @@ describe('WeatherService', () => {
     }).rejects.toEqual(new AppError('City not found', 404));
   });
 
-  it("should return an error if the api doesn't return 200", async () => {
+  it("should return an error if the weather external api doesn't return 200", async () => {
     const { weather } = module.get(AxiosService);
 
     jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
@@ -132,5 +132,19 @@ describe('WeatherService', () => {
     }).rejects.toEqual(
       new AppError("Can't connect to weather external api", 503),
     );
+  });
+
+  it('should return an error if the weather external api is down', async () => {
+    const { weather } = module.get(AxiosService);
+
+    jest.spyOn(weather, 'get').mockImplementationOnce(async () => {
+      throw new Error();
+    });
+
+    await expect(async () => {
+      await service.getByCity({
+        city: 'são paulo',
+      });
+    }).rejects.toEqual(new AppError('Internal server error', 500));
   });
 });
