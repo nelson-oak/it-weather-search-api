@@ -32,30 +32,39 @@ export class WeatherService {
         unitName = 'Kelvin';
     }
 
-    const { data: weatherData, status } =
-      await this.axiosService.weather.get<WeatherExternal>(
-        `weather?q=${city}&units=${weatherUnit}&appid=${this.axiosService.weatherAppId}`,
-      );
+    try {
+      const { data: weatherData, status } =
+        await this.axiosService.weather.get<WeatherExternal>(
+          `weather?q=${city}&units=${weatherUnit}&appid=${this.axiosService.weatherAppId}`,
+        );
 
-    if (status === 404) {
-      throw new AppError('City not found', 404);
+      if (status === 404) {
+        throw new AppError('City not found', 404);
+      }
+
+      if (status !== 200) {
+        console.error('[External API Error] ', { status, weatherData });
+
+        throw new AppError("Can't connect to weather external api", 503);
+      }
+
+      const weatherDescription = weatherData.weather
+        .map((e) => e.main)
+        .join(', ');
+
+      return {
+        city: weatherData.name,
+        weather: weatherDescription,
+        temperature: weatherData.main.temp,
+        unit: unitName,
+      };
+    } catch (err) {
+      if (err instanceof AppError) {
+        throw err;
+      }
+
+      console.error('[External API Error] external api is down', err);
+      throw new AppError('Internal server error', 500);
     }
-
-    if (status !== 200) {
-      console.error('[External API Error] ', { status, weatherData });
-
-      throw new AppError("Can't connect to weather external api", 503);
-    }
-
-    const weatherDescription = weatherData.weather
-      .map((e) => e.main)
-      .join(', ');
-
-    return {
-      city: weatherData.name,
-      weather: weatherDescription,
-      temperature: weatherData.main.temp,
-      unit: unitName,
-    };
   }
 }
