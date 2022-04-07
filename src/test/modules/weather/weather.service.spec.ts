@@ -1,3 +1,4 @@
+import { AppError } from '@errors/app-error';
 import { AxiosService } from '@http/axios/axios.service';
 import { WeatherService } from '@modules/weather/weather.service';
 import { ConfigModule } from '@nestjs/config';
@@ -25,6 +26,7 @@ describe('WeatherService', () => {
     const { weather } = module.get(AxiosService);
 
     jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
+      status: 200,
       data: {
         weather: [{ main: 'Clear' }],
         main: {
@@ -48,6 +50,7 @@ describe('WeatherService', () => {
     const { weather } = module.get(AxiosService);
 
     jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
+      status: 200,
       data: {
         weather: [{ main: 'Clear' }],
         main: {
@@ -72,6 +75,7 @@ describe('WeatherService', () => {
     const { weather } = module.get(AxiosService);
 
     jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
+      status: 200,
       data: {
         weather: [{ main: 'Clear' }],
         main: {
@@ -90,5 +94,23 @@ describe('WeatherService', () => {
     expect(data.city).toEqual('São Paulo');
     expect(data.weather).toEqual('Clear');
     expect(data.unit).toEqual('Kelvin');
+  });
+
+  it('should not be able to get a weather from a non-existing city', async () => {
+    const { weather } = module.get(AxiosService);
+
+    jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
+      status: 404,
+      data: {
+        cod: '404',
+        message: 'city not found',
+      },
+    }));
+
+    await expect(async () => {
+      await service.getByCity({
+        city: 'são paulo',
+      });
+    }).rejects.toEqual(new AppError('City not found', 404));
   });
 });
