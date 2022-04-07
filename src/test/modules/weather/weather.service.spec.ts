@@ -113,4 +113,24 @@ describe('WeatherService', () => {
       });
     }).rejects.toEqual(new AppError('City not found', 404));
   });
+
+  it("should return an error if the api doesn't return 200", async () => {
+    const { weather } = module.get(AxiosService);
+
+    jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
+      status: 401,
+      data: {
+        cod: '401',
+        message: 'unauthorized',
+      },
+    }));
+
+    await expect(async () => {
+      await service.getByCity({
+        city: 'são paulo',
+      });
+    }).rejects.toEqual(
+      new AppError("Can't connect to weather external api", 503),
+    );
+  });
 });
