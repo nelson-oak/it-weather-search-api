@@ -3,6 +3,7 @@ import {
   GetWeatherByCityParam,
   WeatherExternal,
 } from '@dtos/weather';
+import { AppError } from '@errors/app-error';
 import { AxiosService } from '@http/axios/axios.service';
 import { Injectable } from '@nestjs/common';
 
@@ -31,10 +32,14 @@ export class WeatherService {
         unitName = 'Kelvin';
     }
 
-    const { data: weatherData } =
+    const { data: weatherData, status } =
       await this.axiosService.weather.get<WeatherExternal>(
         `weather?q=${city}&units=${weatherUnit}&appid=${this.axiosService.weatherAppId}`,
       );
+
+    if (status === 404) {
+      throw new AppError('City not found', 404);
+    }
 
     const weatherDescription = weatherData.weather
       .map((e) => e.main)
