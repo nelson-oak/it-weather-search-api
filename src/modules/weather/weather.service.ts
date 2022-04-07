@@ -41,6 +41,12 @@ export class WeatherService {
       throw new AppError('City not found', 404);
     }
 
+    if (status !== 200) {
+      console.error('[External API Error] ', { status, weatherData });
+
+      throw new AppError("Can't connect to weather external api", 503);
+    }
+
     const weatherDescription = weatherData.weather
       .map((e) => e.main)
       .join(', ');
