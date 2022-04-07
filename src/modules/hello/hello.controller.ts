@@ -31,7 +31,7 @@ export class HelloController {
       },
     },
   })
-  hello() {
+  async hello() {
     return {
       statusCode: 200,
       message: 'Hello',

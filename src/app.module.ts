@@ -1,8 +1,8 @@
-import { WeatherModule } from '@modules/weather/weather.module';
+import { HttpModule } from '@http/http.module';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [WeatherModule],
+  imports: [HttpModule],
   controllers: [],
   providers: [],
 })

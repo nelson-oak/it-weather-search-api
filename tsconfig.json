@@ -24,6 +24,7 @@
       "@dtos/*": ["./dtos/*"],
       "@modules/*": ["./modules/*"],
       "@http/*": ["./http/*"],
+      "@utils/*": ["./utils/*"],
       "@errors/*": ["./errors/*"]
     }
   }

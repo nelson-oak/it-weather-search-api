@@ -1,5 +1,5 @@
 export class GetWeatherByCityParam {
   city: string;
 
-  units?: 'c' | 'k' | 'f' = 'c';
+  unit?: 'c' | 'k' | 'f' = 'c';
 }
