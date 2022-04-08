@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsIn } from 'class-validator';
 
 export class GetWeatherByCityParams {
   @IsNotEmpty()
@@ -10,6 +10,7 @@ export class GetWeatherByCityParams {
 
   @IsOptional()
   @IsNotEmpty()
+  @IsIn(['c', 'k', 'f'])
   @ApiPropertyOptional({
     description: 'Degree unit',
   })

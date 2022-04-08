@@ -35,6 +35,18 @@ export class WeatherController {
     },
   })
   @ApiResponse({
+    status: 400,
+    description: 'Validation error',
+    schema: {
+      type: 'Object',
+      example: {
+        statusCode: 400,
+        message: ['unit must be one of the following values: c, k, f'],
+        error: 'Bad Request',
+      },
+    },
+  })
+  @ApiResponse({
     status: 404,
     description: 'Not found',
     schema: {
