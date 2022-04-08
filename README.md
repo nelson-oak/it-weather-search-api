@@ -6,7 +6,7 @@ Projeto desenvolvido para o teste em uma vaga da empresa Fasters.
 
 1. Quanto tempo você usou para completar a solução apresentada? O que você faria se tivesse mais tempo?
 
-  Eu levei 5h para desenvolver esse projeto. Coisas que eu poderia adicionar em mais tempo, seriam outras rotas de consulta à essa API do OpenWeather. Talvez outros dados no retorno poderiam ser interessante (sensação térmica por exemplo).
+  Eu levei 5h para desenvolver esse projeto. Coisas que eu poderia adicionar em mais tempo, seriam outras rotas de consulta à essa API do OpenWeather. Talvez outros dados no retorno poderiam ser interessante (sensação térmica por exemplo). Adicionaria também um Rate Limiter, e um container do docker-compose com o Redis (é uma implementação tranquila, mas optei por deixar o projeto simples na execução).
 
 2. Se usou algum framework, qual foi o motivo de ter usado este? Caso contrário, por que não utilizou nenhum?
 
