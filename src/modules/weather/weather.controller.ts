@@ -14,8 +14,8 @@ export class WeatherController {
     summary: 'Get a weather by a city',
     description:
       'Get a weather by a city. ' +
-      'This route receive a city by route params, and can receive a unit value, ' +
-      'and return the weather data for that city',
+      'This route receive a city by query params, and can receive a unit value, ' +
+      'and then return the weather data for that city',
   })
   @ApiResponse({
     status: 200,
@@ -59,7 +59,7 @@ export class WeatherController {
   })
   @ApiResponse({
     status: 500,
-    description: 'Server Error',
+    description: 'Server error',
     schema: {
       type: 'Object',
       example: {
