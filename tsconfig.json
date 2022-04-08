@@ -21,8 +21,10 @@
     "esModuleInterop": true,                        
     "resolveJsonModule": true,
     "paths": {
-      "@use-cases/*": ["./use-cases/*"],
+      "@dtos/*": ["./dtos/*"],
+      "@modules/*": ["./modules/*"],
       "@http/*": ["./http/*"],
+      "@utils/*": ["./utils/*"],
       "@errors/*": ["./errors/*"]
     }
   }

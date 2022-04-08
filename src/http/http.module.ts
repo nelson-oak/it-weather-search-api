@@ -1,8 +1,9 @@
+import { WeatherModule } from '@modules/weather/weather.module';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { HelloModule } from '@use-cases/hello/hello.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), HelloModule],
+  imports: [WeatherModule],
+  providers: [],
+  exports: [],
 })
 export class HttpModule {}
