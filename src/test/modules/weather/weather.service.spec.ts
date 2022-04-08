@@ -99,13 +99,11 @@ describe('WeatherService', () => {
   it('should not be able to get a weather from a non-existing city', async () => {
     const { weather } = module.get(AxiosService);
 
-    jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
-      status: 404,
-      data: {
-        cod: '404',
-        message: 'city not found',
+    jest.spyOn(weather, 'get').mockRejectedValueOnce({
+      response: {
+        status: 404,
       },
-    }));
+    });
 
     await expect(async () => {
       await service.getByCity({
@@ -117,13 +115,11 @@ describe('WeatherService', () => {
   it("should return an error if the weather external api doesn't return 200", async () => {
     const { weather } = module.get(AxiosService);
 
-    jest.spyOn(weather, 'get').mockImplementationOnce(async () => ({
-      status: 401,
-      data: {
-        cod: '401',
-        message: 'unauthorized',
+    jest.spyOn(weather, 'get').mockRejectedValueOnce({
+      response: {
+        status: 401,
       },
-    }));
+    });
 
     await expect(async () => {
       await service.getByCity({
@@ -132,19 +128,5 @@ describe('WeatherService', () => {
     }).rejects.toEqual(
       new AppError("Can't connect to weather external api", 503),
     );
-  });
-
-  it('should return an error if the weather external api is down', async () => {
-    const { weather } = module.get(AxiosService);
-
-    jest.spyOn(weather, 'get').mockImplementationOnce(async () => {
-      throw new Error();
-    });
-
-    await expect(async () => {
-      await service.getByCity({
-        city: 'são paulo',
-      });
-    }).rejects.toEqual(new AppError('Internal server error', 500));
   });
 });
