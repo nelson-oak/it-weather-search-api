@@ -1,6 +1,6 @@
 import {
   GetByCityOutput,
-  GetWeatherByCityParam,
+  GetWeatherByCityParams,
   WeatherExternal,
 } from '@dtos/weather';
 import { AppError } from '@errors/app-error';
@@ -14,7 +14,7 @@ export class WeatherService {
   async getByCity({
     city,
     unit = 'c',
-  }: GetWeatherByCityParam): Promise<GetByCityOutput> {
+  }: GetWeatherByCityParams): Promise<GetByCityOutput> {
     let weatherUnit = '';
     let unitName = '';
 
@@ -35,7 +35,9 @@ export class WeatherService {
     try {
       const { data: weatherData, status } =
         await this.axiosService.weather.get<WeatherExternal>(
-          `weather?q=${city}&units=${weatherUnit}&appid=${this.axiosService.weatherAppId}`,
+          `weather?q=${encodeURI(city)}&units=${weatherUnit}&appid=${
+            this.axiosService.weatherAppId
+          }`,
         );
 
       if (status === 404) {
