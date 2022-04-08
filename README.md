@@ -6,11 +6,11 @@ Projeto desenvolvido para o teste em uma vaga da empresa Fasters.
 
 1. Quanto tempo você usou para completar a solução apresentada? O que você faria se tivesse mais tempo?
 
-  Eu levei 5h para desenvolver esse projeto. Coisas que eu poderia adicionar em mais tempo, seriam outras rotas de consulta à essa API do OpenWeather. Talvez outros dados no retorno poderiam ser interessante (sensação térmica por exemplo). Adicionaria também um Rate Limiter, e um container do docker-compose com o Redis (é uma implementação tranquila, mas optei por deixar o projeto simples na execução).
+    Eu levei 5h para desenvolver esse projeto. Coisas que eu poderia adicionar em mais tempo, seriam outras rotas de consulta à essa API do OpenWeather. Talvez outros dados no retorno poderiam ser interessante (sensação térmica por exemplo). Adicionaria também um Rate Limiter, e um container do docker-compose com o Redis (é uma implementação tranquila, mas optei por deixar o projeto simples na execução).
 
 2. Se usou algum framework, qual foi o motivo de ter usado este? Caso contrário, por que não utilizou nenhum?
 
-  Eu utilizei o Axios para conexão à API externa. Não é um framework, mas acho uma biblioteca interessante para conexão à APIs. Eu tenho mais experiência usando o framework Express, mas desenvolver essa API usando o NestJS me fez me sentir ainda mais confortável ao desenvolver com esse framework que venho estudando recentemente. Não sei se as minhas decisões de arquitetura são as melhores, mas eu acredito que ficou um bom projeto desenvolvido dessa forma.
+    Eu utilizei o Axios para conexão à API externa. Não é um framework, mas acho uma biblioteca interessante para conexão à APIs. Eu tenho mais experiência usando o framework Express, mas desenvolver essa API usando o NestJS me fez me sentir ainda mais confortável ao desenvolver com esse framework que venho estudando recentemente. Não sei se as minhas decisões de arquitetura são as melhores, mas eu acredito que ficou um bom projeto desenvolvido dessa forma.
 
 ## Casos de uso
 
